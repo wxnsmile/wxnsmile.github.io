@@ -14,7 +14,7 @@ http://gonghonglou.com/2016/02/03/firstblog/
 
 …or push an existing repository from the command line
 
-git remote add origin https://github.com/wxnsmile/hello.git
+git remote add origin https://github.com/wxnsmile/wxnsmile.github.io.git
 git push -u origin master
 
 
@@ -24,5 +24,5 @@ echo "# hello" >> README.md
 git init
 git add README.md
 git commit -m "first commit"
-git remote add origin https://github.com/wxnsmile/hello.git
+git remote add origin https://github.com/wxnsmile/wxnsmile.git
 git push -u origin master
