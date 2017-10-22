@@ -111,7 +111,7 @@ MVC全称Model-View-Controller。从结构上可分为3层： 最长层。面向
 <meta property="og:image" content="https://github.com/wxnsmile/wxnsmile.github.io/./images/mvp.jpg">
 <meta property="og:image" content="https://github.com/wxnsmile/wxnsmile.github.io/./images/mvvm.jpg">
 <meta property="og:image" content="https://github.com/wxnsmile/wxnsmile.github.io/./images/step.jpg">
-<meta property="og:updated_time" content="2017-10-22T09:58:59.000Z">
+<meta property="og:updated_time" content="2017-10-22T11:04:17.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="迷你MVVM">
 <meta name="twitter:description" content="文章前我想先提几个问题
@@ -389,7 +389,7 @@ MVC全称Model-View-Controller。从结构上可分为3层： 最长层。面向
 <ul>
 <li>如何解析DOM模板</li>
 <li>如何解析数据</li>
-<li>如何绑定模板与数据<br>由于MVVM的主要思想是实现数据的双向绑定，所以可以利用Object.defineProperty方法实现对数据的监听。</li>
+<li>如何绑定模板与数据<br>由于MVVM的主要思想是实现数据的双向绑定，所以可以利用Object.defineProperty方法的setter和getter实现对数据的监听。</li>
 </ul>
 </li>
 <li><p>基本组成部分<br> 要实现mvvm的双向绑定，就必须要实现以下几点：</p>
@@ -403,7 +403,8 @@ MVC全称Model-View-Controller。从结构上可分为3层： 最长层。面向
 <li><p>实现难点</p>
 <ul>
 <li>如何在监听到数据变化之后，通知给被观察者？利用发布订阅者模式，在数据变化之后，通知订阅者，订阅者在接收到变化之后，做相应的处理。</li>
-<li>如何将compile与observer联系起来？</li>
+<li>如何将compile与observer联系起来？利用watcher将两者联系起来，能够订阅并收到每个属性变化的通知，执行指令绑定对应的回调函数。</li>
+<li>如何定义指令的优先级（未实现）</li>
 </ul>
 </li>
 </ol>
@@ -415,7 +416,7 @@ MVC全称Model-View-Controller。从结构上可分为3层： 最长层。面向
 <li>可测试性：清晰的View分层，使得针对表现层业务逻辑的测试更容易，更简单。</li>
 </ul>
 </li>
-<li>缺<ul>
+<li>缺点<ul>
 <li>类会增多： 每个View对应一个ViewModel</li>
 <li>调用复杂度增大：由于数据都是从viewModel获取的，对于新人来说，最开始看代码，不知道真实的模型是谁。例如常用的tab组件，一般都是一个数据，如果不断的通过viewModel去取，沟通上没有那么直接。况且每封装一层，意味着要写很多的代码去融合他们的转化。</li>
 <li>数据绑定使得Bug很难背调试。例如看到页面异常，有可能View的代码有bug也有可能是Model的代码有问题，定位问题变得不那么容易。</li>
@@ -423,7 +424,17 @@ MVC全称Model-View-Controller。从结构上可分为3层： 最长层。面向
 </ul>
 </li>
 </ol>
-<h3 id="MVVM适用场景"><a href="#MVVM适用场景" class="headerlink" title="MVVM适用场景"></a>MVVM适用场景</h3><h3 id="MVVM的展望"><a href="#MVVM的展望" class="headerlink" title="MVVM的展望"></a>MVVM的展望</h3>
+<h3 id="MVVM适用场景"><a href="#MVVM适用场景" class="headerlink" title="MVVM适用场景"></a>MVVM适用场景</h3><pre><code>1. 需要实时显示数据的变化: MVVM最大的特点就是实现了数据的双向绑定
+2. 业务逻辑与数据分离
+</code></pre><h3 id="MVVM的展望"><a href="#MVVM的展望" class="headerlink" title="MVVM的展望"></a>MVVM的展望</h3><pre><code>1. 
+</code></pre><h3 id="其他语言对MVVM的实现"><a href="#其他语言对MVVM的实现" class="headerlink" title="其他语言对MVVM的实现"></a>其他语言对MVVM的实现</h3><p>C#: <a href="https://www.codeproject.com/Articles/819294/WPF-MVVM-step-by-step-Basics-to-Advance-Level" target="_blank" rel="external">https://www.codeproject.com/Articles/819294/WPF-MVVM-step-by-step-Basics-to-Advance-Level</a><br>iOS: <a href="http://ios.jobbole.com/83602/" target="_blank" rel="external">http://ios.jobbole.com/83602/</a> \ <a href="https://objccn.io/issue-13-1/" target="_blank" rel="external">https://objccn.io/issue-13-1/</a><br>安卓：<a href="https://github.com/xuyushi/AndroidMVVMDemo">https://github.com/xuyushi/AndroidMVVMDemo</a></p>
+<h4 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h4><ol>
+<li><a href="https://www.zhihu.com/question/20148405" target="_blank" rel="external">MVC、MVP、MVVM 三种组合模式分别有什么样的理解</a></li>
+<li><a href="https://segmentfault.com/a/1190000006599500" target="_blank" rel="external">剖析Vue原理&amp;实现双向绑定MVVM</a></li>
+<li><a href="https://www.zhihu.com/question/53176471" target="_blank" rel="external">开发vue（或类似的MVVM框架）的过程中，需要面对的主要问题有哪些？</a></li>
+<li><a href="https://segmentfault.com/a/1190000009397476" target="_blank" rel="external">MVVM框架理解</a></li>
+</ol>
+
       
     </div>
 
@@ -596,7 +607,7 @@ MVC全称Model-View-Controller。从结构上可分为3层： 最长层。面向
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#文章前我想先提几个问题"><span class="nav-number">1.</span> <span class="nav-text">文章前我想先提几个问题</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#概述"><span class="nav-number"></span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#迷你MVVM的实现"><span class="nav-number"></span> <span class="nav-text">迷你MVVM的实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MVVM的优缺点"><span class="nav-number"></span> <span class="nav-text">MVVM的优缺点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MVVM适用场景"><span class="nav-number"></span> <span class="nav-text">MVVM适用场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MVVM的展望"><span class="nav-number"></span> <span class="nav-text">MVVM的展望</span></a></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#文章前我想先提几个问题"><span class="nav-number">1.</span> <span class="nav-text">文章前我想先提几个问题</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#概述"><span class="nav-number"></span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#迷你MVVM的实现"><span class="nav-number"></span> <span class="nav-text">迷你MVVM的实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MVVM的优缺点"><span class="nav-number"></span> <span class="nav-text">MVVM的优缺点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MVVM适用场景"><span class="nav-number"></span> <span class="nav-text">MVVM适用场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MVVM的展望"><span class="nav-number"></span> <span class="nav-text">MVVM的展望</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他语言对MVVM的实现"><span class="nav-number"></span> <span class="nav-text">其他语言对MVVM的实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#参考文献"><span class="nav-number">1.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
             
 
           </div>
