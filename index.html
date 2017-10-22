@@ -359,6 +359,11 @@
 <li>MVVM是微软公司提出的，它是MVP模式与WPF结合的应用方式发展演变而来的一种新型框架。<br>相信了解MVC框架的的对M和V都已经有所了解，但是VM的作用以及如何使用它？它有什么优点缺点？以及与MVC的区别。下面会为大家进行讲解。</li>
 </ol>
 <p>这里先给大家展示一张经典的表达MVC和MVVM精华的缩略图：<br><img src="./images/mvc.jpg" alt=""><br><img src="./images/mvp.jpg" alt=""><br><img src="./images/mvvm.jpg" alt=""><br>从图中我们大概可以了解到以下几点：</p>
+<ol>
+<li>在MVP中View并不直接使用Model，它们之间是通过Presenter进行的，所有的交互都发生在Presenter内部，而MVC中的View是直接从Model读取数据而不是Controller。</li>
+<li>Presenter与具体的View是没有直接关联，而是通过定义好的接口进行交互，从而使得在变更View的时候可以保持Presenter的不变，即重用。如果要实现的UI比较复杂，而且相关的展示逻辑还和Model有关系，就可以在View和Presenter之间设置一个Adapter，由这个Adapter来访问Model和View，避免两者之间的关联。</li>
+<li>View和ViewModel之间没有了MVP的界面接口，而是直接交互，用数据”绑定”的形式让数据更新的事件不需要开发人员手动去编写特殊用例，而是自动的双向同步。与MVP相比，MVVM不仅简化了业务与界面的依赖关心，还优化了数据频繁更新的解决方案。</li>
+</ol>
 <h3 id="迷你MVVM的实现"><a href="#迷你MVVM的实现" class="headerlink" title="迷你MVVM的实现"></a>迷你MVVM的实现</h3><ol>
 <li>概述<br> 该demo实现了mvvm很基本的功能，像解析数据、数据双向绑定以及绑定事件等操作。</li>
 <li>基本组成部分<br> 要实现mvvm的双向绑定，就必须要实现以下几点：<ul>
@@ -369,17 +374,27 @@
 </ul>
 </li>
 <li>实现难点<ul>
-<li>重复渲染数据</li>
+<li>如何在监听到数据变化之后，通知给被观察者？</li>
 <li>如何将compile与observer联系起来</li>
 <li>如何解析for指令中的数据</li>
 </ul>
 </li>
 </ol>
 <h3 id="MVVM的优缺点"><a href="#MVVM的优缺点" class="headerlink" title="MVVM的优缺点"></a>MVVM的优缺点</h3><ol>
+<li>优点<ul>
 <li>低耦合：View可以独立于Model变化和修改，同一个ViewModel可以被多个View复用；并且可以做到View和Model的变化互不影响；</li>
 <li>可重用性：可以把一些视图的逻辑放在ViewModel，让多个View复用；</li>
 <li>独立开发：开发人员可以专注与业务逻辑和数据的开发（ViewModel），界面设计人员可以专注于UI(View)的设计；</li>
 <li>可测试性：清晰的View分层，使得针对表现层业务逻辑的测试更容易，更简单。</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>类会增多： 每个View对应一个ViewModel</li>
+<li>调用复杂度增大：由于数据都是从viewModel获取的，对于新人来说，最开始看代码，不知道真实的模型是谁。例如常用的tab组件，一般都是一个数据，如果不断的通过viewModel去取，沟通上没有那么直接。况且每封装一层，意味着要写很多的代码去融合他们的转化。</li>
+<li>数据绑定使得Bug很难背调试。例如看到页面异常，有可能View的代码有bug也有可能是Model的代码有问题，定位问题变得不那么容易。</li>
+<li>数据双向绑定不利于代码重用</li>
+</ul>
+</li>
 </ol>
 <h3 id="MVVM适用场景"><a href="#MVVM适用场景" class="headerlink" title="MVVM适用场景"></a>MVVM适用场景</h3><h3 id="MVVM的展望"><a href="#MVVM的展望" class="headerlink" title="MVVM的展望"></a>MVVM的展望</h3>
           
