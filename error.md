@@ -11,6 +11,8 @@ https://hexo.io/zh-cn/docs/
 http://theme-next.iissnan.com/getting-started.html
 http://gonghonglou.com/2016/02/03/firstblog/
 
+http://ijiaober.github.io/2014/08/06/hexo/hexo-07/
+
 
 …or push an existing repository from the command line
 
